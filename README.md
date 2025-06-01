@@ -65,6 +65,8 @@ APIs
         "message": "Hive log has been added succesfully.",
         "success": true
     }
+
+
 2. Get  : api/hives/
   Quary Params: ?page=1&limit=8&startDate=2025-06-01&endDate=2025-06-03
   Response:
@@ -86,6 +88,8 @@ APIs
     "message": "Hive log data has been fetched succesfully.",
     "success": true
   }
+
+
 3. Post : api/crops/
    Body:
       {
@@ -117,6 +121,8 @@ APIs
         "message": "New crop calendar entry has been added.",
         "success": true
       }
+
+
 4. Get  : api/crops/
       Query Params: ?latitude=12.2&longitude=23.4&radiusInKm=5000&date=2025-05-20
       Response:
@@ -142,13 +148,76 @@ APIs
             "message": "Crop log data has been fetched succesfully.",
             "success": true
         }
-5. Post : api/user/login
-6. Post : api/user/logout
-7. Post : api/user/register
 
+
+5. Post : api/user/register
+      Body:
+        {
+            "email": "jeel@gmail.com",
+            "password": "1234",
+            "role": "admin"
+        }
+      Response:
+        {
+            "statusCode": 201,
+            "data": {
+                "_id": "683ca33d51ca91f92258a214",
+                "email": "jeel@gmail.com",
+                "role": "admin",
+                "createdAt": "2025-06-01T19:00:13.077Z",
+                "updatedAt": "2025-06-01T19:00:13.077Z",
+                "__v": 0
+            },
+            "message": "User is created succesfully.",
+            "success": true
+        }
+
+
+6. Post : api/user/login
+     Body:
+      {
+          "email": "jeel@gmail.com",
+          "password": "1234"
+      }
+     Response:
+      {
+          "statusCode": 200,
+          "data": {
+              "user": {
+                  "_id": "683ca33d51ca91f92258a214",
+                  "email": "jeel@gmail.com",
+                  "role": "admin",
+                  "createdAt": "2025-06-01T19:00:13.077Z",
+                  "updatedAt": "2025-06-01T19:02:41.390Z",
+                  "__v": 0
+              },
+              "accessToken":           
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODNjYTMzZDUxY2E5MWY5MjI1OGEyMTQiLCJlbWFpbCI6ImplZWxAZ21haWwuY29tIiwiaWF0IjoxNzQ4ODA0NTYxLCJleHAiOjE3NDg4OTA5NjF9.ORYOLfQGAW6vqBYVMDepUskQCvUnq7wCO09VMIKEdlM",
+              "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODNjYTMzZDUxY2E5MWY5MjI1OGEyMTQiLCJpYXQiOjE3NDg4MDQ1NjEsImV4cCI6MTc0OTY2ODU2MX0.0bVxi4o1cqifjqT1krlSVaa4XF-KoOpmbSUMiZw8wkk"
+          },
+          "message": "User logged in successfully.",
+          "success": true
+      }
+
+
+7. Post : api/user/logout
+    Response:
+      {
+          "statusCode": 200,
+          "data": {},
+          "message": "User logged out successfully.",
+          "success": true
+      }
 ```
 
 ## 3. Explanation of logic
+1. Added middleware in each route verifyJWT to validate user auth and its role.
+2. used GeoJson 2d-sphere location and its indexing to get radius based data.
+3. Applied Pagination to fetch limited data.
 
 ## 4. Mention of any bonus/assumptions
+1. Implemented token and role ['admin', 'beekeeper'] based user authentication with register, login and logout api.
+2. Admin can create hive and crop and get list of hive and cropcalender nearby data.
+3. Beekeeper can only get data not modify or add new data.
+4. Added swagger config.
 
