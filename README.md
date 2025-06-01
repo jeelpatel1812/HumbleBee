@@ -208,16 +208,26 @@ APIs
           "message": "User logged out successfully.",
           "success": true
       }
+
+8. Get: api/crops/export-csv
+    Query Params: ?latitude=12.2&longitude=23.4&radiusInKm=5000&date=2025-05-20
+
+    Response:
+      "$__","$isNew","_doc" "{""activePaths"":{""paths"":{""location.coordinates"":""init"",""location.type"":""init"",""_id"":""init"",""name"":""init"",""floweringStart"":""init"",""floweringEnd"":""init"",""recommendedHiveDensity"":""init"",""__v"":""init""},""states"":{""require"":{},""init"":{""_id"":true,""name"":true,""floweringStart"":true,""floweringEnd"":true,""location.type"":true,""location.coordinates"":true,""recommendedHiveDensity"":true,""__v"":true}}},""skipId"":true}",false,"{""location"":{""type"":""Point"",""coordinates"":[3.2,2.33]},""_id"":""683c333d55ff5e22cfb615a0"",""name"":""Sunflower-4"",""floweringStart"":""2025-04-03T00:00:00.000Z"",""floweringEnd"":""2025-05-23T00:00:00.000Z"",""recommendedHiveDensity"":33,""__v"":0}"
+
+      
 ```
 
 ## 3. Explanation of logic
 1. Added middleware in each route verifyJWT to validate user auth and its role.
 2. used GeoJson 2d-sphere location and its indexing to get radius based data.
 3. Applied Pagination to fetch limited data.
+4. Utilised json2csv to export csv from json data.
 
 ## 4. Mention of any bonus/assumptions
 1. Implemented token and role ['admin', 'beekeeper'] based user authentication with register, login and logout api.
 2. Admin can create hive and crop and get list of hive and cropcalender nearby data.
 3. Beekeeper can only get data not modify or add new data.
 4. Added swagger config.
+5. api/crops/export-csv for export json to csv data for crop calender nearby data.
 
