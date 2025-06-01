@@ -32,7 +32,7 @@ cd server/src
 node index.js
 ```
 
-## 2. Sample data or Postman collection
+## 2. Sample data/ test cases or Postman collection for each API
 
 ```json
 APIs
@@ -40,7 +40,7 @@ APIs
    Body:
     {
     	"latitude": 53.72,
-        "longitude": 337.3,
+        "longitude": 37.3,
         "numColonies": 43
     }
    response :
@@ -51,7 +51,7 @@ APIs
                 "type": "Point",
                 "coordinates": [
                     53.72,
-                    337.3
+                    37.3
                 ]
             },
             "_id": "683c3ce631f37597d9850cf0",
@@ -220,9 +220,10 @@ APIs
 
 ## 3. Explanation of logic
 1. Added middleware in each route verifyJWT to validate user auth and its role.
-2. used GeoJson 2d-sphere location and its indexing to get radius based data.
+2. Used GeoJson 2d-sphere location and its indexing to get radius based data.
 3. Applied Pagination to fetch limited data.
 4. Utilised json2csv to export csv from json data.
+5. Data Validation like coordinates in [-180, 180] range and user role in ['admin', 'beekeeper'] etc.
 
 ## 4. Mention of any bonus/assumptions
 1. Implemented token and role ['admin', 'beekeeper'] based user authentication with register, login and logout api.
