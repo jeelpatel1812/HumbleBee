@@ -215,6 +215,8 @@ APIs
     Response:
       "$__","$isNew","_doc" "{""activePaths"":{""paths"":{""location.coordinates"":""init"",""location.type"":""init"",""_id"":""init"",""name"":""init"",""floweringStart"":""init"",""floweringEnd"":""init"",""recommendedHiveDensity"":""init"",""__v"":""init""},""states"":{""require"":{},""init"":{""_id"":true,""name"":true,""floweringStart"":true,""floweringEnd"":true,""location.type"":true,""location.coordinates"":true,""recommendedHiveDensity"":true,""__v"":true}}},""skipId"":true}",false,"{""location"":{""type"":""Point"",""coordinates"":[3.2,2.33]},""_id"":""683c333d55ff5e22cfb615a0"",""name"":""Sunflower-4"",""floweringStart"":""2025-04-03T00:00:00.000Z"",""floweringEnd"":""2025-05-23T00:00:00.000Z"",""recommendedHiveDensity"":33,""__v"":0}"
 
+9. Get: api/hives/export-csv
+   Same as above
       
 ```
 
@@ -230,5 +232,5 @@ APIs
 2. Admin can create hive and crop and get list of hive and cropcalender nearby data.
 3. Beekeeper can only get data not modify or add new data.
 4. Added swagger config.
-5. api/crops/export-csv for export json to csv data for crop calender nearby data.
+5. api/crops/export-csv for export json to csv data for hive and crop calender nearby data.
 
