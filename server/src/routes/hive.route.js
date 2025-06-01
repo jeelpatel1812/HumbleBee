@@ -1,12 +1,13 @@
 import { Router } from "express";
-import {createHiveLog, getHiveLog} from "../controllers/hive.controller.js";
-import verifyJWT from "../middlewares/auth.middleware.js";
+import {createHiveLog, getHiveLog, getHiveLogCSV} from "../controllers/hive.controller.js";
+import {verifyJWT, verifyAdminRole} from "../middlewares/auth.middleware.js";
 
 const router = Router();
-router.route("/").post((req, res)=>{
+router.route("/").post(verifyJWT, verifyAdminRole, (req, res)=>{
     createHiveLog(req, res);
 })
 
-router.route("/").get(getHiveLog)
+router.route("/").get(verifyJWT, getHiveLog);
+router.route("/export-csv").get(verifyJWT, getHiveLogCSV)
 
 export default router

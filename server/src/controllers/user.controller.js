@@ -5,9 +5,9 @@ import { User } from '../models/users.model.js';
 import jwt from 'jsonwebtoken';
 
 const registerController = AsyncHandler(async(req, res)=>{
-    const {email, password, name} = req.body;
+    const {email, password, name, role} = req.body;
 
-    if([email, password].some((field)=>{field.trim() === ""})){
+    if([email, password, role].some((field)=>{field.trim() === ""})){
         throw new ApiError(400, "All field are required.")
     }
     const isUserExist = await User.findOne({email});
@@ -16,7 +16,8 @@ const registerController = AsyncHandler(async(req, res)=>{
     const user = await User.create({
         email,
         password,
-        name
+        name,
+        role
     });
     const createdUser = await User.findById(user._id).select("-password -refreshToken");
     if(!createdUser) throw new ApiError(500, "Something went wrong.");
